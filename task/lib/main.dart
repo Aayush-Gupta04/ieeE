@@ -7,8 +7,9 @@ import 'pages/2nd page.dart';
 
 
 
-void main()=> runApp(MaterialApp(
+void main()  => runApp(MaterialApp(
     home : HOME(),
+  debugShowCheckedModeBanner: false,
   routes: {
     '/home': (context) => HOME(),
     '/edit': (context) => edit(),

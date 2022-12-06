@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 import 'Homepage.dart';
@@ -12,6 +11,7 @@ class edit extends StatefulWidget {
 }
 
 class _editState extends State<edit> {
+  bool isimg =false;
   TextEditingController _name = TextEditingController();
   TextEditingController _bio = TextEditingController();
   TextEditingController _Hobby1 = TextEditingController();
@@ -47,10 +47,13 @@ class _editState extends State<edit> {
                   ImagePicker picker =ImagePicker();
                   final image = await picker.pickImage(source: ImageSource.gallery);
                   if (image==null) return;
-                  final imgT = File(image.path);
+
+                  if (isimg) {
+                    final imgT = File(image.path);
                   setState(() {
                     this._img= imgT;
                   });
+                  }
                 },
 
                 style: ElevatedButton.styleFrom(
@@ -169,7 +172,7 @@ class _editState extends State<edit> {
               ElevatedButton(
                 child: Text('SAVE'),
                 onPressed: () {
-                  Navigator.of(context).push(
+                  Navigator.of(context).push  (
                       MaterialPageRoute(
                           builder: (context) => nextpage(
                             name: _name.text,
@@ -177,8 +180,10 @@ class _editState extends State<edit> {
                             Hobby1: _Hobby1.text,
                             Hobby2: _Hobby2.text,
                             Hobby3: _Hobby3.text,
+                            image: _img,
+
                           )),
-                      );
+                      ) ;
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blueAccent,
